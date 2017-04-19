@@ -17,7 +17,6 @@ private:
 	void* curl;
 	decltype(std::chrono::high_resolution_clock::now()) starttime;
 	int timeout;
-	int progress_callback(void *clientp, curl_off_t dltotal, curl_off_t dlnow, curl_off_t ultotal, curl_off_t ulnow);
 };
 
 #endif  /* HTTPDOWNLOADER_HPP */

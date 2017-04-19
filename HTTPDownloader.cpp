@@ -1,11 +1,11 @@
 #include "HTTPDownloader.h"
 #include <fstream>
 #include <iostream>
-#include <functional>
 using namespace std;
 size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream) {
-	reinterpret_cast<ofstream*>(stream)->write(reinterpret_cast<char*>(ptr), size * nmemb);
-	return size * nmemb;
+	size_t t_size = size * nmemb；
+	reinterpret_cast<ofstream*>(stream)->write(reinterpret_cast<char*>(ptr), t_size);
+	return t_size;
 }
 HTTPDownloader::HTTPDownloader() {
 	curl = curl_easy_init();
@@ -19,8 +19,8 @@ int HTTPDownloader::download(const std::string& url, const std::string& path, lo
 	starttime = chrono::high_resolution_clock::now();
 	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 
-	curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, timeout);
-	curl_easy_setopt(curl, CURLOPT_TIMEOUT, 1L);
+	curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
+	curl_easy_setopt(curl, CURLOPT_TIMEOUT, timeout);
 	curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1);
 	curl_easy_setopt(curl, CURLOPT_ACCEPT_ENCODING, "deflate");
 	std::ofstream out(path, std::ios::out | std::ios::trunc | std::ios::binary);
