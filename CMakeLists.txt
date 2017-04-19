@@ -11,6 +11,12 @@ find_package(Threads REQUIRED)
 include_directories("${CURL_INCLUDE_DIRS}")
 
 add_executable(archbestmirrors ${SRC_LIST})
+
+set_target_properties(archbestmirrors PROPERTIES LINK_SEARCH_START_STATIC 1)
+set_target_properties(archbestmirrors PROPERTIES LINK_SEARCH_END_STATIC 1)
+set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
+
 target_link_libraries(archbestmirrors 
     ${CURL_LIBRARIES}
 	${CMAKE_THREAD_LIBS_INIT}
