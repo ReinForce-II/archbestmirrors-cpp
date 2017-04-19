@@ -80,7 +80,8 @@ int main(int argc, char** argv) {
 	}
 
 	sort(v_result.begin(), v_result.end(), [](result a, result b) {return b.speed < a.speed; });
-	for (auto& result : vector<result>(v_result.begin(), v_result.begin() + 10)) {
+	vector<result> v_rhead(v_result.begin(), v_result.begin() + 10);
+	for (auto& result : v_rhead) {
 		cout << result.speed / 1048576.0 << "MB/s\t" << result.url << endl;
 	}
 }
