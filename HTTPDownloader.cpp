@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream) {
-	size_t t_size = size * nmemb；
+	size_t t_size = size * nmemb;
 	reinterpret_cast<ofstream*>(stream)->write(reinterpret_cast<char*>(ptr), t_size);
 	return t_size;
 }
